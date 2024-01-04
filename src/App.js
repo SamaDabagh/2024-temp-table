@@ -4,9 +4,9 @@ import sewer_design from "./assets/sewer_design.csv";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import ExportExcel from "./components/export_excel";
+// import ExportExcel from "./components/export_excel";
 import "./App.css";
-import HistogramDiameter from "./components/Histograms/Histogram_Diameter";
+// import HistogramDiameter from "./components/Histograms/Histogram_Diameter";
 
 export default function App() {
   const [columnDefs, setColumnDefs] = useState([]);
@@ -23,9 +23,9 @@ export default function App() {
             result.data.slice(1).map((dataOfEachRow) => {
               const rowObject = {};
               result.data[0].forEach((key, index) => {
-                rowObject[key] = dataOfEachRow[index];
+                rowObject[key] = Number(dataOfEachRow[index]);
               });
-              // console.log(rowObject);
+              console.log(rowObject);
               return rowObject;
             })
           );
@@ -47,36 +47,17 @@ export default function App() {
     () => ({
       sortable: true,
       filter: "agNumberColumnFilter",
-      filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
-      valueGetter: numberValueGetter,
-
       tooltipField: "Pipe",
       unSortIcon: true,
       resizable: true,
     }),
     []
   );
-  const paginationNumberFormatter = useCallback((params) => {
-    console.log("[" + params.value.toLocaleString() + "]");
-
-    return "[" + params.value.toLocaleString() + "]";
-  }, []);
-
-  const onFirstDataRendered = useCallback((params) => {
-    gridRef.current.api.paginationGoToPage(4);
-  }, []);
 
   const onPageSizeChanged = useCallback(() => {
     var value = document.getElementById("page-size").value;
     gridRef.current.api.paginationSetPageSize(Number(value));
   }, []);
-  const cellClickListener = useCallback((e) => {
-    console.log("cellClicked: ", e);
-  });
-
-  var numberValueGetter = function (params) {
-    return params.value;
-  };
 
   return (
     <div className="ag-theme-alpine" style={{ height: 525 }}>
@@ -93,7 +74,6 @@ export default function App() {
       </select>
       <AgGridReact
         ref={gridRef}
-        onCellClicked={cellClickListener}
         columnDefs={columnDefs}
         rowData={rowData}
         rowSelection="multiple"
@@ -102,8 +82,7 @@ export default function App() {
         pagination={true}
         paginationPageSize={10}
         // paginationAutoPageSize={true}
-        paginationNumberFormatter={paginationNumberFormatter}
-        onFirstDataRendered={onFirstDataRendered}
+
         enableBrowserTooltips={true}
       />
       {/* <HistogramDiameter rowData={rowData} /> */}
