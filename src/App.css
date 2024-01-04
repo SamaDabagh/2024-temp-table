@@ -1,0 +1,21 @@
+.ag-theme-alpine {
+  width: 96vw;
+
+  margin-left: 2vw;
+}
+
+.ag-cell-label-container .ag-header-cell-sorted-none {
+  text-align: center !important;
+}
+
+.ag-header-icon.ag-header-cell-menu-button {
+  opacity: 1 !important;
+}
+.pagination-dropdown {
+  margin-left: 20px;
+  padding: 5px;
+}
+/* 
+.ag-sort-indicator-icon.ag-sort-ascending-icon {
+  opacity: 1 !important;
+} */
