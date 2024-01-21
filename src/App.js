@@ -4,9 +4,12 @@ import sewer_design from "./assets/sewer_design.csv";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-// import ExportExcel from "./components/export_excel";
+import ExportExcel from "./components/export_excel";
 import "./App.css";
-// import HistogramDiameter from "./components/Histograms/Histogram_Diameter";
+import HistogramDiameter from "./components/Histograms/Histogram_Diameter";
+import HistogramSlope from "./components/Histograms/Histogram_Slope";
+import HistogramVelocity from "./components/Histograms/Histogram_Velocity";
+import HistogramHD from "./components/Histograms/Histogram_H_D";
 
 export default function App() {
   const [columnDefs, setColumnDefs] = useState([]);
@@ -25,7 +28,6 @@ export default function App() {
               result.data[0].forEach((key, index) => {
                 rowObject[key] = Number(dataOfEachRow[index]);
               });
-              console.log(rowObject);
               return rowObject;
             })
           );
@@ -40,8 +42,6 @@ export default function App() {
     };
     fetchParseData();
   }, []);
-  console.log("columnDefs: ", columnDefs);
-  console.log("rowData[0]: ", rowData);
 
   const defaultColDef = useMemo(
     () => ({
@@ -60,32 +60,62 @@ export default function App() {
   }, []);
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 525 }}>
-      {/* <ExportExcel /> */}
-      <select
-        onChange={onPageSizeChanged}
-        id="page-size"
-        className="pagination-dropdown"
-      >
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-      </select>
-      <AgGridReact
-        ref={gridRef}
-        columnDefs={columnDefs}
-        rowData={rowData}
-        rowSelection="multiple"
-        animateRows={true}
-        defaultColDef={defaultColDef}
-        pagination={true}
-        paginationPageSize={10}
-        // paginationAutoPageSize={true}
+    <main className="container-fluid  ">
+      <section className="container row col-1 px-3">
+        <ExportExcel className="export-excel-btn btn" />
+        <select
+          onChange={onPageSizeChanged}
+          id="page-size"
+          className="pagination-dropdown my-5"
+        >
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </section>
 
-        enableBrowserTooltips={true}
-      />
-      {/* <HistogramDiameter rowData={rowData} /> */}
-    </div>
+      <div className="ag-theme-alpine text-center" style={{ height: 525 }}>
+        <AgGridReact
+          ref={gridRef}
+          columnDefs={columnDefs}
+          rowData={rowData}
+          rowSelection="multiple"
+          animateRows={true}
+          defaultColDef={defaultColDef}
+          pagination={true}
+          paginationPageSize={10}
+          // paginationAutoPageSize={true}
+
+          enableBrowserTooltips={true}
+        />
+        <div className="container-histogram container-fluid">
+          <div className=" row px-3 py-5">
+            <div className="col">
+              {rowData.length > 0 && (
+                <HistogramDiameter className="histogram" rowData={rowData} />
+              )}{" "}
+            </div>
+            <div className="col">
+              {rowData.length > 0 && (
+                <HistogramSlope className="histogram" rowData={rowData} />
+              )}{" "}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              {rowData.length > 0 && (
+                <HistogramVelocity className="histogram" rowData={rowData} />
+              )}{" "}
+            </div>
+            <div className="col">
+              {rowData.length > 0 && (
+                <HistogramHD className="histogram" rowData={rowData} />
+              )}{" "}
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }

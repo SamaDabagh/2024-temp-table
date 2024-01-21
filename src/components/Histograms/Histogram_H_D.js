@@ -3,23 +3,22 @@ import React from "react";
 import { ResponsiveScatterPlotCanvas } from "@nivo/scatterplot";
 import { BasicTooltip } from "@nivo/tooltip";
 
-const HistogramDiameter = ({ rowData }) => {
+const HistogramHD = ({ rowData }) => {
   const colors = ["#9DA880"];
   let data = [];
 
   rowData.forEach((element, index) => {
-    if (
-      isNaN(element["Diameter"]) ||
-      isNaN(element["Total Discharge (lit/s)"])
-    ) {
+    if (isNaN(element["h/D"]) || isNaN(element["Total Discharge (lit/s)"])) {
       return;
     }
     const a = {
-      x: +element["Diameter"],
+      x: +element["h/D"],
       y: +element["Total Discharge (lit/s)"],
     };
     data.push(a);
   });
+
+  // console.log("data: =======>", data);
 
   return (
     <div
@@ -32,13 +31,11 @@ const HistogramDiameter = ({ rowData }) => {
         colors={colors}
         data={[
           {
-            id: "Flow / Diameter",
+            id: "Flow / h/D",
             data: data,
           },
         ]}
         renderNode={(ctx, node) => {
-          console.log("node====", node.x);
-
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.size / 2, 0, 2 * Math.PI);
           ctx.fillStyle = "#9DA880";
@@ -61,7 +58,7 @@ const HistogramDiameter = ({ rowData }) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "Diameter",
+          legend: "h/D",
           legendPosition: "middle",
           legendOffset: 46,
         }}
@@ -97,4 +94,4 @@ const HistogramDiameter = ({ rowData }) => {
     </div>
   );
 };
-export default HistogramDiameter;
+export default HistogramHD;
