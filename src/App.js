@@ -76,7 +76,6 @@ export default function App() {
   };
 
   const onGridReady = (params) => {
-    console.log("params :", params);
     gridApiRef.current = params.api;
   };
   return (
@@ -91,6 +90,14 @@ export default function App() {
           onChange={onPageSizeChanged}
           id="page-size"
           className="pagination-dropdown col-3 my-5 border border-success rounded"
+          style={{
+            border: "3px solid",
+            padding: "15px",
+            fontSize: "14px",
+            fontWeight: "bold",
+            // color: "#82ca9d",
+            cursor: "pointer",
+          }}
         >
           <option value="10">10</option>
           <option value="25">25</option>
@@ -109,8 +116,6 @@ export default function App() {
           defaultColDef={defaultColDef}
           pagination={true}
           paginationPageSize={10}
-          // paginationAutoPageSize={true}
-
           enableBrowserTooltips={true}
           onGridReady={onGridReady}
           gridOptions={gridOptions}

@@ -6,6 +6,16 @@ const ExportExcel = ({ onBtnExport }) => {
       <button
         type="button"
         className="export-excel-btn btn btn-outline-success btn-lg "
+        style={{
+          background: "#82ca9d",
+          border: "1px solid #f7f7f4",
+          padding: "15px",
+          fontSize: "14px",
+          fontWeight: "bold",
+          borderRadius: "4px",
+          color: "white",
+          cursor: "pointer",
+        }}
         onClick={onBtnExport}
       >
         Download The Table

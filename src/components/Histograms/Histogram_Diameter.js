@@ -37,8 +37,6 @@ const HistogramDiameter = ({ rowData }) => {
           },
         ]}
         renderNode={(ctx, node) => {
-          console.log("node====", node.x);
-
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.size / 2, 0, 2 * Math.PI);
           ctx.fillStyle = "#198754";
