@@ -4,7 +4,7 @@ import { ResponsiveScatterPlotCanvas } from "@nivo/scatterplot";
 import { BasicTooltip } from "@nivo/tooltip";
 
 const HistogramHD = ({ rowData }) => {
-  const colors = ["#9DA880"];
+  const colors = ["#198754"];
   let data = [];
 
   rowData.forEach((element, index) => {
@@ -38,9 +38,9 @@ const HistogramHD = ({ rowData }) => {
         renderNode={(ctx, node) => {
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.size / 2, 0, 2 * Math.PI);
-          ctx.fillStyle = "#9DA880";
+          ctx.fillStyle = "#198754";
           ctx.fill();
-          ctx.fillStyle = "#9DA880";
+          ctx.fillStyle = "#198754";
           ctx.stroke();
         }}
         margin={{ top: 60, right: 60, bottom: 70, left: 90 }}

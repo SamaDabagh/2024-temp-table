@@ -23,7 +23,16 @@
 .ag-header-icon.ag-header-cell-menu-button {
   opacity: 1 !important;
 }
+
+.container-top-of-the-table {
+}
 .pagination-dropdown {
   margin-left: 70px;
+  padding: 7px;
+}
+
+.export-excel-btn {
+  margin-left: 60px;
+  width: 200px;
   padding: 5px;
 }

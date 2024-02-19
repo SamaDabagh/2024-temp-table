@@ -1,9 +1,17 @@
 import React from "react";
-import * as FileSaver from "file-saver";
-import XLSX from "sheetjs-style";
 
-const ExportExcel = () => {
-  return <div>ExportExcel</div>;
+const ExportExcel = ({ onBtnExport }) => {
+  return (
+    <div className="col-4">
+      <button
+        type="button"
+        className="export-excel-btn btn btn-outline-success btn-lg "
+        onClick={onBtnExport}
+      >
+        Download The Table
+      </button>
+    </div>
+  );
 };
 
 export default ExportExcel;

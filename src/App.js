@@ -59,14 +59,36 @@ export default function App() {
     gridRef.current.api.paginationSetPageSize(Number(value));
   }, []);
 
+  //export to csv
+  const gridApiRef = useRef(null);
+  const gridOptions = {
+    defaultColDef,
+    suppressExcelExport: true,
+    popupParent: document.body,
+    columnDefs,
+    rowData,
+  };
+
+  const onBtnExport = () => {
+    gridApiRef.current.exportDataAsCsv();
+  };
+
+  const onGridReady = (params) => {
+    console.log("params :", params);
+    gridApiRef.current = params.api;
+  };
   return (
     <main className="container-fluid  ">
-      <section className="container row col-1 px-3">
-        <ExportExcel className="export-excel-btn btn" />
+      <section className="container-top-of-the-table  row align-items-center px-3">
+        <ExportExcel
+          className="export-excel-btn  "
+          onBtnExport={onBtnExport}
+          onGridReady={onGridReady}
+        />
         <select
           onChange={onPageSizeChanged}
           id="page-size"
-          className="pagination-dropdown my-5"
+          className="pagination-dropdown col-3 my-5 border border-success rounded"
         >
           <option value="10">10</option>
           <option value="25">25</option>
@@ -88,6 +110,8 @@ export default function App() {
           // paginationAutoPageSize={true}
 
           enableBrowserTooltips={true}
+          onGridReady={onGridReady}
+          gridOptions={gridOptions}
         />
         <div className="container-histogram container-fluid">
           <div className=" row px-3 py-5">

@@ -41,9 +41,9 @@ const HistogramVelocity = ({ rowData }) => {
         renderNode={(ctx, node) => {
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.size / 2, 0, 2 * Math.PI);
-          ctx.fillStyle = "#9DA880";
+          ctx.fillStyle = "#198754";
           ctx.fill();
-          ctx.fillStyle = "#9DA880";
+          ctx.fillStyle = "#198754";
           ctx.stroke();
         }}
         margin={{ top: 60, right: 60, bottom: 70, left: 90 }}
