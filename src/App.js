@@ -23,13 +23,15 @@ export default function App() {
         delimiter: ",",
         complete: (result) => {
           setRowData(
-            result.data.slice(1).map((dataOfEachRow) => {
-              const rowObject = {};
-              result.data[0].forEach((key, index) => {
-                rowObject[key] = Number(dataOfEachRow[index]);
-              });
-              return rowObject;
-            })
+            result.data
+              .slice(1, result.data.length - 1)
+              .map((dataOfEachRow) => {
+                const rowObject = {};
+                result.data[0].forEach((key, index) => {
+                  rowObject[key] = Number(dataOfEachRow[index]);
+                });
+                return rowObject;
+              })
           );
           setColumnDefs(
             result.data[0].map((columnKey) => ({
