@@ -7,7 +7,7 @@ const ExportExcel = ({ onBtnExport }) => {
         type="button"
         className="export-excel-btn btn btn-outline-success btn-lg "
         style={{
-          background: "#82ca9d",
+          background: "#198754",
           border: "1px solid #f7f7f4",
           padding: "15px",
           fontSize: "14px",

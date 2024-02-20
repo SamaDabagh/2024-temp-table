@@ -95,7 +95,6 @@ export default function App() {
             padding: "15px",
             fontSize: "14px",
             fontWeight: "bold",
-            // color: "#82ca9d",
             cursor: "pointer",
           }}
         >
